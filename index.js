@@ -25,6 +25,9 @@ app.get("/", (req, res) => {
     res.send("Welcome to sample blogging platform server");
 });
 
+const userRoutes = require("./Routers/userRouter");
+app.use(userRoutes);
+
 // HTTP request logger
 app.listen(PORT, () => {
     console.log(`Server is starting at ${PORT}`);
