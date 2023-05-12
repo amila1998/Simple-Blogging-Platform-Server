@@ -3,6 +3,7 @@ const validateEmail = require("../Helpers/validateEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../Models/userModel");
+require("dotenv").config();
 
 const userController = {
   register: async (req, res) => {
@@ -72,9 +73,9 @@ const userController = {
       const rf_token = createToken.refresh({ id: user._id });
       res.cookie("_apprftoken", rf_token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        maxAage: 24 * 60 * 60 * 1000, // 24h
+        secure: true,
+        sameSite: 'strict',
+        maxAge: 24 * 60 * 60 * 1000, // 24h
       });
 
       // signing success
@@ -130,6 +131,7 @@ const userController = {
       res.clearCookie("_apprftoken");
       //change the access token
       createToken.access({ id: "abc0" });
+      createToken.refresh({ id: "abc0" });
       // success
       return res.status(200).json({ msg: "Signout success." });
     } catch (err) {
