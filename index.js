@@ -10,7 +10,7 @@ require("./db/conn");
 
 // Middleware
 app.use(cors({
-    origin: '*',
+    origin: ['http://localhost:3000', 'https://jazzy-sawine-45922a.netlify.app'],
     credentials: true,
   }));
   
