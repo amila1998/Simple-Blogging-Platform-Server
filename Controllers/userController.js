@@ -73,11 +73,13 @@ const userController = {
       const rf_token = createToken.refresh({ id: user._id });
       res.cookie("_apprftoken", rf_token, {
         httpOnly: true,
-        secure: true,
-        sameSite: 'strict',
+        secure: process.env.NODE_ENV === 'production',
+        domain: process.env.NODE_ENV === 'production' ? ".onrender.com":"localhost",
+        sameSite: process.env.NODE_ENV === 'production' ? "none":'strict',
         maxAge: 24 * 60 * 60 * 1000, // 24h
-      });
+        path:'/'
 
+      });
       // signing success
       res.status(200).json({ msg: "Signing success" });
     } catch (err) {
