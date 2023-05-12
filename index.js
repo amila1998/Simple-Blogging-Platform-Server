@@ -10,7 +10,6 @@ require("./db/conn");
 
 // Middleware
 app.use(cors({
-    // origin: ['http://localhost:3000', 'https://sample-blog-platform.netlify.app/'],
     origin: '*',
     credentials: true,
   }));
