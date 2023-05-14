@@ -29,6 +29,9 @@ app.get("/", (req, res) => {
 const userRoutes = require("./Routers/userRouter");
 app.use(userRoutes);
 
+const postRoutes = require("./Routers/postRouter");
+app.use(postRoutes);
+
 // HTTP request logger
 app.listen(PORT, () => {
     console.log(`Server is starting at ${PORT}`);
