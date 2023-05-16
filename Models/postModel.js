@@ -9,19 +9,25 @@ const postSchema = new Schema(
         content: {
             type: String,
         },
-        authorName: {
-            type: String,
-            required: true,
-        },
-        authorId: {
-            type: String,
-            required: true,
+        author: {
+            name:String,
+            id:String,
+            avatar:String
         },
         isPublish: {
             type: Boolean,
             default: false,
             required: true,
         },
+        createdAt: {
+            type: Date,
+            required: true,
+        },
+        updateAt: {
+            type: Date,
+            required: true,
+        },
+
     },
     { timestamp: true }
 );
