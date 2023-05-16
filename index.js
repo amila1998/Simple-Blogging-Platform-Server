@@ -11,7 +11,7 @@ require("./db/conn");
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://jazzy-sawine-45922a.netlify.app'],
+    origin: ['http://localhost:3000', 'https://jazzy-sawine-45922a.netlify.app','https://illustrious-daifuku-6a3601.netlify.app'],
     credentials: true,
 }));
 app.use(fileUpload({
