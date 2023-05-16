@@ -74,7 +74,7 @@ const userController = {
       res.cookie("_apprftoken", rf_token, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? "none":'strict',
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000, // 24h
       });
       // signing success
