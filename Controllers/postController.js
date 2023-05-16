@@ -44,7 +44,19 @@ const postController = {
     },
     getAllPosts: async (req, res) => {
         try {
-            const posts = await Post.find()
+            const { search } = req.query;
+
+            // Create a query object to filter by author name or title
+            const query = {
+                $or: [
+                    { "author.name": { $regex: search, $options: "i" } },
+                    { title: { $regex: search, $options: "i" } },
+                ],
+            };
+
+            // Fetch posts from the database, filter, and sort by createdAt
+            const posts = await Post.find(query).sort({ createdAt: -1 });
+
             return res.status(200).json(posts);
         } catch (err) {
             res.status(500).json({ msg: err.message });
