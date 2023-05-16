@@ -7,8 +7,13 @@ const postController = {
             const { title, content, isPublish } = req.body;
             const user = await User.findById(req.user.id)
             if (!user) return res.status(400).json({ msg: "User does not exist." })
+            const author = {
+                name:user.name,
+                id:user._id,
+                avatar:user.avatar
+            }
             const newPost = new Post({
-                title, content, authorName: user.name, authorId: user._id, isPublish
+                title, content, author, isPublish, createdAt:Date.now(),updateAt:Date.now()
             })
             await newPost.save()
             return res.status(200).json({ msg: "Post Successfully Created." });
@@ -21,7 +26,7 @@ const postController = {
             const pid = req.params.pid
             const { title, content, isPublish } = req.body;
             await Post.findOneAndUpdate({ _id: pid }, {
-                title, content, isPublish
+                title, content, isPublish,updateAt:Date.now()
             })
             return res.status(200).json({ msg: "Post Successfully Updated." });
         } catch (err) {

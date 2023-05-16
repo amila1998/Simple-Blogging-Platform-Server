@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const app = express();
 const cors = require("cors");
+const fileUpload = require('express-fileupload')
 const PORT = process.env.PORT || 6010;
 
 // Import database connection
@@ -12,8 +13,10 @@ require("./db/conn");
 app.use(cors({
     origin: ['http://localhost:3000', 'https://jazzy-sawine-45922a.netlify.app'],
     credentials: true,
-  }));
-  
+}));
+app.use(fileUpload({
+    useTempFiles: true
+}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -28,6 +31,8 @@ app.get("/", (req, res) => {
 
 const userRoutes = require("./Routers/userRouter");
 app.use(userRoutes);
+
+app.use('/api', require('./Routers/upload'))
 
 const postRoutes = require("./Routers/postRouter");
 app.use(postRoutes);
